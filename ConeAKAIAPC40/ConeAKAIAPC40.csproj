@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sanford.Multimedia.Midi" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConeEngine\ConeEngine.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /y &quot;$(OutDir)ConeAKAIAPC40.dll&quot; &quot;$(SolutionDir)Cone\$(OutDir)plugins\&quot;&#xD;&#xA;xcopy /y &quot;$(OutDir)Sanford.Multimedia.Midi.dll&quot; &quot;$(SolutionDir)Cone\$(OutDir)plugins\&quot;" />
+  </Target>
+
+</Project>
