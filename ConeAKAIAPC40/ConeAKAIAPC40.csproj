@@ -10,14 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Sanford.Multimedia.Midi" Version="6.6.2" />
+    <PackageReference Include="Serilog" Version="3.1.0-dev-02078" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConeEngine\ConeEngine.csproj">
-      <Private>false</Private>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </ProjectReference>
+    <Reference Include="ConeEngine">
+      <HintPath>..\..\Cone\ConeEngine\bin\x64\Debug\net6.0\ConeEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

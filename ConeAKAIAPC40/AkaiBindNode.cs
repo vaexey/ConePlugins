@@ -41,11 +41,11 @@ namespace ConeAKAIAPC40
 
             if(ButtonSignature)
             {
-                var down = value > 0;
+                var down = value >= 0.5;
 
                 var bsgn = down ? "9" : "8";
 
-                plugin.SendMidi(bsgn + Signature.Remove(0,1), 127);
+                plugin.SendMidi(bsgn + Signature.Remove(0,1), (byte)Math.Round(value));
             }
         }
 

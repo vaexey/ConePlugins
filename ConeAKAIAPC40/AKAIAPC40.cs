@@ -106,10 +106,14 @@ namespace ConeAKAIAPC40
             if(sign.StartsWith("9") || sign.StartsWith("8"))
             {
                 var down = sign.StartsWith("9");
+                var shortSig = sign.Remove(0, 1);
 
                 foreach(var bn in ActiveBindNodes.Where(bn => bn.Signature.StartsWith("x")))
                 {
-                    bn.OnAkai(down ? 1 : 0);
+                    if(bn.Signature.Remove(0,1) == shortSig)
+                    {
+                        bn.OnAkai(down ? 1 : 0);
+                    }
                 }
             }
         }
