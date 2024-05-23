@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConeAKAIAPC40", "ConeAKAIAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConeVoicemeeter", "ConeVoicemeeter\ConeVoicemeeter.csproj", "{BE570B0E-2084-4175-A580-319839D3CF21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConeMQTT", "ConeMQTT\ConeMQTT.csproj", "{38AF288C-1B01-47DB-A028-64F3A1D822A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConeMQTT", "ConeMQTT\ConeMQTT.csproj", "{38AF288C-1B01-47DB-A028-64F3A1D822A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

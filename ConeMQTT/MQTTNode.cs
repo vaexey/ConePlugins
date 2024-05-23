@@ -33,12 +33,15 @@ namespace ConeMQTT
             _ = device.SendMessage(Signature, value);
         }
 
-
-        public override bool Diff()
+        public override bool HasPoll(bool reset = false)
         {
             if(diff)
             {
-                diff = false;
+                if(reset)
+                {
+                    diff = false;
+                }
+
                 return true;
             }    
 

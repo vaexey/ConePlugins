@@ -13,6 +13,7 @@ namespace ConeVoicemeeter
         public double LastValue { get; set; }
 
         protected Voicemeeter plugin;
+        protected bool firstRead = true;
 
         public VoicemeeterBindNode(string signature, double lastValue, Voicemeeter plugin)
         {
@@ -35,11 +36,13 @@ namespace ConeVoicemeeter
 
         public virtual void OnVM(double value)
         {
-            if (Math.Abs(value - LastValue) < 0.01)
+            if (Math.Abs(value - LastValue) < 0.01 && !firstRead)
                 return;
 
+            firstRead = false;
+
             LastValue = value;
-            SetChanged(true);
+            SetPoll(true);
         }
     }
 }

@@ -37,6 +37,8 @@ namespace ConeVoicemeeter
         public override Result Disable(Context ctx)
         {
             enabled = false;
+            hasGivenDevice = false;
+            ActiveBindNodes.Clear();
 
             return base.Disable(ctx);
         }

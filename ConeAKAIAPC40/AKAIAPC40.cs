@@ -24,6 +24,8 @@ namespace ConeAKAIAPC40
 
         public override Result Enable(Context ctx)
         {
+            Disable();
+
             od = new OutputDevice(GetMidiOutputDevice(MidiName));
             id = new InputDevice(GetMidiInputDevice(MidiName));
 
@@ -42,7 +44,7 @@ namespace ConeAKAIAPC40
 
         public override Result Disable(Context ctx)
         {
-            this.Disable();
+            Disable();
 
             return Result.OK;
         }
@@ -50,6 +52,7 @@ namespace ConeAKAIAPC40
         protected void Disable()
         {
             enabled = false;
+            ActiveBindNodes.Clear();
 
             try { od.Dispose(); } catch { }
             try { id.Dispose(); } catch { }
@@ -95,7 +98,13 @@ namespace ConeAKAIAPC40
 
             Log.Verbose("AKAI INPUT::SIGN {0} VAL {1}", sign, value);
 
-            foreach(var bn in ActiveBindNodes)
+            if (!enabled)
+            {
+                Log.Warning("AKAI received midi message but plugin was disabled");
+                return;
+            }
+
+            foreach (var bn in ActiveBindNodes)
             {
                 if(bn.Signature == sign)
                 {
@@ -120,6 +129,12 @@ namespace ConeAKAIAPC40
 
         public virtual void SendMidi(string signature, byte value)
         {
+            if (!enabled)
+            {
+                Log.Warning("Tried to send AKAI message but plugin was disabled");
+                return;
+            }
+
             byte[] bytes = { Convert.ToByte(signature.Substring(0, 2), 16),
                              Convert.ToByte(signature.Substring(2,2), 16),
                              value, 0};
@@ -135,7 +150,7 @@ namespace ConeAKAIAPC40
             catch(Exception ex)
             {
                 Log.Warning("AKAI : Could not send midi: {0}. Disabling...", ex.Message);
-                this.Disable();
+                Disable();
             }
         }
 
@@ -149,7 +164,7 @@ namespace ConeAKAIAPC40
         {
             Log.Warning("AKAI : MIDI device error: {0}. Disabling...", e.Error.Message);
 
-            this.Disable();
+            Disable();
         }
     }
 }

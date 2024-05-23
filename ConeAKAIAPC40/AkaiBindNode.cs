@@ -52,7 +52,7 @@ namespace ConeAKAIAPC40
         public virtual void OnAkai(double value)
         {
             LastValue = value;
-            SetChanged(true);
+            SetPoll(true);
         }
     }
 }
